@@ -362,10 +362,28 @@ const App = () => {
         {queryResult && (
           <div className="space-y-6">
             <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-                <BarChart3 className="w-6 h-6" />
-                Query Results ({queryResult.length} rows)
-              </h2>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-semibold flex items-center gap-2">
+                  <BarChart3 className="w-6 h-6" />
+                  Query Results ({queryResult.length} rows)
+                </h2>
+                <button
+                  onClick={() => {
+                    const csv = Papa.unparse(queryResult);
+                    const blob = new Blob([csv], { type: 'text/csv' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `query_results_${new Date().toISOString().slice(0,10)}.csv`;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                  }}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium flex items-center gap-2"
+                >
+                  <Upload className="w-4 h-4 rotate-180" />
+                  Export Results
+                </button>
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
