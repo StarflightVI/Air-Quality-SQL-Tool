@@ -11,6 +11,9 @@ A web application for uploading CSV files, running SQL queries, and visualizing 
 - Distribution visualizations
 - End-to-end testing capability
 
+## Deployed:
+Link: https://vercel.com/wyatt-neiguts-projects/air-quality-sql-tool
+
 ## Local Development
 
 1. Install dependencies:
